@@ -66,7 +66,7 @@ class CarApplication
                     break;
                 case 6:
                     Console.WriteLine("Bye");
-                    break;
+                    return;
             }
         }
     }
@@ -99,7 +99,7 @@ class CarApplication
 
             make = Console.ReadLine()?.Trim();
 
-            if (make != null && !make.Equals(""))
+            if (!string.IsNullOrEmpty(make))
             {
                 break;
             }
@@ -113,7 +113,7 @@ class CarApplication
 
             model = Console.ReadLine()?.Trim();
 
-            if (model != null && !model.Equals(""))
+            if (!string.IsNullOrEmpty(model))
             {
                 break;
             }
@@ -166,9 +166,9 @@ class CarApplication
 
     public static void SearchByMake()
     {
-        HashSet<string> uniqueMakes = new HashSet<string>(cars.Select((car) => car.Make.ToLower()));
-
         Console.WriteLine("Makes in list:");
+
+        HashSet<string> uniqueMakes = new HashSet<string>(cars.Select((car) => car.Make.ToLower()));
         if (uniqueMakes.Count != 0)
         {
             foreach (string m in uniqueMakes)
@@ -189,13 +189,13 @@ class CarApplication
 
             make = Console.ReadLine()?.Trim();
 
-            if (make != null && !make.Equals(""))
+            if (!string.IsNullOrEmpty(make))
             {
                 break;
             }
         }
 
-        IEnumerable<Car> results = from car in cars where car.Make.Equals(make, StringComparison.CurrentCultureIgnoreCase) select car;
+        IEnumerable<Car> results = cars.Where((car) => car.Make.Equals(make, StringComparison.CurrentCultureIgnoreCase));
 
         Console.WriteLine("===RESULT LIST===");
         if (!results.Any())
@@ -234,7 +234,7 @@ class CarApplication
             }
         }
 
-        IEnumerable<Car> results = from car in cars where car.Type == type select car;
+        IEnumerable<Car> results = cars.Where((car) => car.Type == type);
 
         Console.WriteLine("===RESULT LIST===");
         if (!results.Any())
@@ -263,7 +263,7 @@ class CarApplication
 
             model = Console.ReadLine()?.Trim();
 
-            if (model != null && !model.Equals(""))
+            if (!string.IsNullOrEmpty(model))
             {
                 break;
             }

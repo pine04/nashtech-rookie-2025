@@ -1,0 +1,14 @@
+@model aspnetcoremvc2.Models.GetRookiesByYearViewModel
+
+@{
+    ViewData["Title"] = $"Rookies born in {@Model.Year}";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<a asp-controller="Rookie" asp-action="Create" class="btn btn-outline-primary">
+    Create new
+</a>
+
+@await Html.PartialAsync("_RookiesTable.cshtml", Model.Rookies)
+

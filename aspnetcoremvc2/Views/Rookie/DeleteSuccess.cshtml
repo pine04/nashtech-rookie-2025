@@ -1,0 +1,13 @@
+@model aspnetcoremvc2.Models.Person;
+
+@{
+    ViewData["Title"] = "Success";
+}
+
+<p>
+    Person @Model.FirstName @Model.LastName was removed from the list successfully!
+</p>
+
+<a asp-controller="Rookie" asp-action="Index" class="btn btn-primary">
+    Back to list
+</a>

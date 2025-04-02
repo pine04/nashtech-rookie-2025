@@ -1,0 +1,25 @@
+@model aspnetcoremvc2.Models.Person
+
+@{
+    ViewData["Title"] = $"Details of {Model.FirstName} {Model.LastName}";
+}
+
+<a asp-action="Index" class="btn btn-outline-primary">Back to list</a>
+
+<h1>@ViewData["Title"]</h1>
+
+<p><strong>First name:</strong> @Model.FirstName</p>
+<p><strong>Last name:</strong> @Model.LastName</p>
+<p><strong>Gender:</strong> @Model.Gender.ToString()</p>
+<p><strong>Date of birth:</strong> @Model.DateOfBirth.ToString("dd/MM/yyyy")</p>
+<p><strong>Phone number:</strong> @Model.PhoneNumber</p>
+<p><strong>Birthplace:</strong> @Model.BirthPlace</p>
+<p><strong>Is Graduated:</strong> @(@Model.IsGraduated ? "Yes" : "No")</p>
+
+<a asp-controller="Rookie" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+    Edit rookie
+</a>
+
+<a asp-controller="Rookie" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+    Delete rookie
+</a>

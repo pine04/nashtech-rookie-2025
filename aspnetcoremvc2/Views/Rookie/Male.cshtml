@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Male Rookie List";
+}
+
+@model List<aspnetcoremvc2.Models.Person>
+
+<h1>@ViewData["Title"]</h1>
+
+<a asp-controller="Rookie" asp-action="Create" class="btn btn-outline-primary">
+    Create new
+</a>
+
+@await Html.PartialAsync("_RookiesTable.cshtml", Model)
+

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using efcore1;
+using efcore2;
 
 #nullable disable
 
-namespace efcore1.Migrations
+namespace efcore2.Migrations
 {
     [DbContext(typeof(CompanyContext))]
     partial class CompanyContextModelSnapshot : ModelSnapshot
@@ -22,22 +22,7 @@ namespace efcore1.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("EmployeeProject", b =>
-                {
-                    b.Property<int>("EmployeesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProjectsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EmployeesId", "ProjectsId");
-
-                    b.HasIndex("ProjectsId");
-
-                    b.ToTable("EmployeeProject");
-                });
-
-            modelBuilder.Entity("efcore1.Models.Department", b =>
+            modelBuilder.Entity("efcore2.Models.Department", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,7 +62,7 @@ namespace efcore1.Migrations
                         });
                 });
 
-            modelBuilder.Entity("efcore1.Models.Employee", b =>
+            modelBuilder.Entity("efcore2.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,7 +88,7 @@ namespace efcore1.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("efcore1.Models.Project", b =>
+            modelBuilder.Entity("efcore2.Models.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -121,7 +106,7 @@ namespace efcore1.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("efcore1.Models.ProjectEmployee", b =>
+            modelBuilder.Entity("efcore2.Models.ProjectEmployee", b =>
                 {
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
@@ -136,10 +121,10 @@ namespace efcore1.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("ProjectEmployee");
+                    b.ToTable("ProjectEmployees");
                 });
 
-            modelBuilder.Entity("efcore1.Models.Salary", b =>
+            modelBuilder.Entity("efcore2.Models.Salary", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -161,24 +146,9 @@ namespace efcore1.Migrations
                     b.ToTable("Salaries");
                 });
 
-            modelBuilder.Entity("EmployeeProject", b =>
+            modelBuilder.Entity("efcore2.Models.Employee", b =>
                 {
-                    b.HasOne("efcore1.Models.Employee", null)
-                        .WithMany()
-                        .HasForeignKey("EmployeesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("efcore1.Models.Project", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("efcore1.Models.Employee", b =>
-                {
-                    b.HasOne("efcore1.Models.Department", "Department")
+                    b.HasOne("efcore2.Models.Department", "Department")
                         .WithMany("Employees")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -187,15 +157,15 @@ namespace efcore1.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("efcore1.Models.ProjectEmployee", b =>
+            modelBuilder.Entity("efcore2.Models.ProjectEmployee", b =>
                 {
-                    b.HasOne("efcore1.Models.Employee", "Employee")
+                    b.HasOne("efcore2.Models.Employee", "Employee")
                         .WithMany("ProjectEmployees")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("efcore1.Models.Project", "Project")
+                    b.HasOne("efcore2.Models.Project", "Project")
                         .WithMany("ProjectEmployees")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -206,31 +176,30 @@ namespace efcore1.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("efcore1.Models.Salary", b =>
+            modelBuilder.Entity("efcore2.Models.Salary", b =>
                 {
-                    b.HasOne("efcore1.Models.Employee", "Employee")
+                    b.HasOne("efcore2.Models.Employee", "Employee")
                         .WithOne("Salary")
-                        .HasForeignKey("efcore1.Models.Salary", "EmployeeId")
+                        .HasForeignKey("efcore2.Models.Salary", "EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("efcore1.Models.Department", b =>
+            modelBuilder.Entity("efcore2.Models.Department", b =>
                 {
                     b.Navigation("Employees");
                 });
 
-            modelBuilder.Entity("efcore1.Models.Employee", b =>
+            modelBuilder.Entity("efcore2.Models.Employee", b =>
                 {
                     b.Navigation("ProjectEmployees");
 
-                    b.Navigation("Salary")
-                        .IsRequired();
+                    b.Navigation("Salary");
                 });
 
-            modelBuilder.Entity("efcore1.Models.Project", b =>
+            modelBuilder.Entity("efcore2.Models.Project", b =>
                 {
                     b.Navigation("ProjectEmployees");
                 });

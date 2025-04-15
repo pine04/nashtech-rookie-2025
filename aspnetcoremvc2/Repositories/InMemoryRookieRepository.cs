@@ -1,6 +1,5 @@
 using Microsoft.Extensions.Caching.Memory;
 using aspnetcoremvc2.Models;
-using aspnetcoremvc2.Controllers;
 
 namespace aspnetcoremvc2.Repositories;
 
@@ -123,7 +122,7 @@ public class InMemoryRookieRepository : IRookieRepository
     {
         List<Person>? rookies = _cache.Get<List<Person>?>("rookies");
 
-        if (rookies == null || rookies.Count == 0)
+        if (rookies == null)
         {
             return null;
         }
@@ -138,7 +137,7 @@ public class InMemoryRookieRepository : IRookieRepository
     {
         List<Person>? rookies = _cache.Get<List<Person>?>("rookies");
 
-        if (rookies == null || rookies.Count == 0)
+        if (rookies == null)
         {
             return false;
         }
@@ -166,7 +165,7 @@ public class InMemoryRookieRepository : IRookieRepository
     {
         List<Person>? rookies = _cache.Get<List<Person>?>("rookies");
 
-        if (rookies == null || rookies.Count == 0)
+        if (rookies == null)
         {
             return null;
         }
